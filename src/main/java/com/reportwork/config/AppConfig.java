@@ -30,7 +30,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@EnableJpaRepositories("com.reportwork.repository")
+@EnableJpaRepositories(basePackages = "com.reportwork.repository")
 @ComponentScan("com.reportwork")
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
@@ -79,7 +79,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.reportwork.model");
+        em.setPackagesToScan(".com.reportwork.model");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

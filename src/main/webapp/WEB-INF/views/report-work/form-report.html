@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .main {
+            min-height: 40rem;
+        }
+    </style>
+</head>
+<body>
+<div class="content-container">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Report work</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/home}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Report work</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="text-center">Form report</h1>
+                    <form th:action="@{/report/save}" method="post" th:object="${report}">
+                        <p>Mã nhân viên công ty: 1123</p>
+                        <p>Tên nhân viên: 1123</p>
+                        <div class="mb-3">
+                            <label for="workingHours" class="form-label">Thời gian đi làm</label>
+                            <input type="text" class="form-control" id="workingHours" th:field="*{workingHours}"
+                                   aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="closingTime" class="form-label">Thời gian tan làm</label>
+                            <input type="text" class="form-control" id="closingTime" th:field="*{closingTime}"
+                                   aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Hãy tích vào nếu như bạn đi muộn về sớm</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" th:field="*{isBehindTime}" th:value="true" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Đến muộn
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" th:field="*{isLeavingEarly}" th:value="true" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Về sớm
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <select class="form-select" name="conditions" aria-label="Default select example" th:field="*{conditions}" >
+                                <option selected value="">Sức khoẻ ngày hôm nay</option>
+                                <option value="好調">好調</option>
+                                <option value="普通">普通</option>
+                                <option value="不調">不調</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" th:field="*{impressions}"  placeholder="Leave a comment here" id="floatingTextarea1" style="height: 100px"></textarea>
+                            <label for="floatingTextarea1">Cảm nhận 1 ngày</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" th:field="*{tomorrowSchedule}" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Dự định công việc ngày mai</label>
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div class="me-3">
+                                <label for="taskName" class="form-label">Task name</label>
+                                <input type="text" class="form-control" id="taskName" th:field="*{taskName}" aria-describedby="emailHelp">
+                            </div>
+                            <div>
+                                <label for="progressRate" class="form-label">Progress Rate (%)</label>
+                                <input type="text" class="form-control" id="progressRate" th:field="*{progressRate}" aria-describedby="emailHelp">
+
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary  mx-auto d-block mb-3">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Contact Information</h4>
+                    <p>Phone: 0123456789</p>
+                    <p>Email: info@example.com</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Address</h4>
+                    <p>123 ABC Street, XYZ District, ABC City</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
